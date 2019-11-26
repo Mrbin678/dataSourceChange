@@ -1,0 +1,23 @@
+server:
+  port: 8099
+  servlet:
+    context-path: /data
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      # 注意（名称不支持大写和下划线可用中横线 比如 错误 的命名（slave_**, slaveTwo）)
+      master: #主库（数据源-1）
+        url: jdbc:mysql://localhost:3306/chapter05-1
+        username: root
+        password: 123456
+      slave: #从库（数据源-2）
+        open: true
+        url: jdbc:mysql://localhost:3306/chapter05-2
+        username: root
+        password: 123456
+
+mybatis:
+  type-aliases-package: com.sccl.data_source_change.domain #包别名
+  mapper-locations: classpath*:mybatis/*Mapper*.xml #扫描mapper映射文件
